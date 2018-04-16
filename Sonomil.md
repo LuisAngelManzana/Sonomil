@@ -4,19 +4,16 @@ Tabla de estimacion de tiempo
 
 -------------------------------------------------------
 | Tarea                    | T.Estimado | T.Acumulado |
-| ----- 	               | ---------- | ----------- |
-|1.Planificacion           |     1      |      1      |	     |
-|2.Analisis	               |	 1      |      2      |
-|3.Diseño	               |     2      |      4      |
-|4.Creacion de BD          |     2      |      6      |
-|5.Alta de Equipo          |     1      |      7      |
-|6.Bajas de Equipo         |     1      |      8      | 
-|7.Modificacion de Equipo  |     2      |      10     |
-|8.Consulta de Equipo      |     1      |      11     |
-|9.Creacion de Contrato    |     2      |      13     |
-|10.Guardar Clientes       |     2      |      15     |
-|11.Pruebas                |     2      |      17     |
-|12.Entrega                |     1      |      18     |
+| ---------------------    | ---------- | ----------- |
+|1.Creacion de BD          |     2      |      3      |
+|2.Alta de Equipo          |     2      |      4      |
+|3.Bajas de Equipo         |     2      |      6      | 
+|4.Modificacion de Equipo  |     2      |      8      |
+|5.Consulta de Equipo      |     2      |      10     |
+|6.Creacion de Contrato    |     3      |      13     |
+|7.Guardar Clientes        |     2      |      15     |
+|8.Pruebas                 |     4      |      19     |
+|9.Entrega		   |     1      |      20     |
 -------------------------------------------------------
 
 
@@ -25,32 +22,36 @@ Tabla de estimacion de tiempo
 | ---- | ------ | ----- |
 |  1   |  1     |  1    | 
 |  2   |  1     |  2	|
-|  3   |  2	    |  4	|
-|  4   |  1	    |  5	|
-|  5   |  2 	|  7	|
-|  6   |  1	    |  8	|
-|  7   |  1  	|  9	|
-|  8   |  2	    |  11	|
-|  9   |  1	    |  12	|
-|  10  |  2	    |  14	|
+|  3   |  1	|  3	|
+|  4   |  2	|  5	|
+|  5   |  1 	|  6	|
+|  6   |  1	|  7	|
+|  7   |  1	|  8	|
+|  8   |  1	|  10	|
+|  9   |  1	|  11	|
+|  10  |  1  	|  12	|
+|  11  |  2     |  14   | 
+|  12  |  1     |  15	|
+|  13  |  1	|  16	|
+|  14  |  1	|  17	|
+|  15  |  1 	|  18	|
+|  16  |  1	|  19	|
+|  17  |  1	|  20	|
 -------------------------
 
---------------------------------------------------------
-| Tarea 	            		| Hora|  VGP  |  VGA   |  
-| ----------------------------	| --- | ----  | -----  |
-|  1.Planificacion	            |  1  |	 8.33 | 8.33   |	
-|  2.Analisis   	            |  2  |  4.16 | 12.49  |
-|  3.Diseño    		            |  3  |  8.33 | 20.82  |
-|  4.Creacion de BD    	     	|  4  |  8.33 | 29.15  |
-|  5.Alta de Equipo    	     	|  5  |  2.08 | 31.23  |
-|  6.Baja de Equipo   		    |  6  |  4.16 | 35.39  |
-|  7.Modificacion de Equipo    	|  7  |  8.33 | 43.72  |
-|  8.Consulta de Equipo 	    |  8  |  8.33 | 52.05  |
-|  9.Creacion de Contrato	    |  9  | 12.49 | 64.54  |
-|  10.Guardardo de Clientes 	|  11 | 16.66 | 81.2   |
-|  11.Pruebas 			        |  13 | 16.66 | 97.86  |
-|  12.Conclusiones		        |  14 |  2.14 | 100.00 |
---------------------------------------------------------
+--------------------------------------------------------------------
+| Tarea                    | T.Estimado | T.Acumulado |  VGP | VGA |	
+| ---------------------    | ---------- | ----------- | ---- | --- |
+|1.Creacion de BD          |     2      |      3      |  10  | 10  |
+|2.Alta de Equipo          |     2      |      4      |  10  | 20  |
+|3.Bajas de Equipo         |     2      |      6      |  10  | 30  |
+|4.Modificacion de Equipo  |     2      |      8      |  10  | 40  |
+|5.Consulta de Equipo      |     2      |      10     |  10  | 50  |
+|6.Creacion de Contrato    |     3      |      13     |  15  | 65  |
+|7.Guardar Clientes        |     2      |      15     |  10  | 75  |
+|8.Pruebas                 |     4      |      19     |  20  | 95  |
+|9.Entrega		   |     1      |      20     |   5  |  5  |
+--------------------------------------------------------------------
 
 
 
