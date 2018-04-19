@@ -26,15 +26,15 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jButton3" max="32767" attributes="0"/>
-                  <Component id="jButton1" max="32767" attributes="0"/>
-                  <Component id="jButton2" min="-2" pref="131" max="-2" attributes="0"/>
+                  <Component id="BtnBaja" max="32767" attributes="0"/>
+                  <Component id="BtnInventario" max="32767" attributes="0"/>
+                  <Component id="BtnAlta" min="-2" pref="131" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="159" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jButton5" max="32767" attributes="0"/>
-                  <Component id="jButton4" pref="0" max="32767" attributes="0"/>
-                  <Component id="jButton6" min="-2" pref="136" max="-2" attributes="0"/>
+                  <Component id="BtnContrato" max="32767" attributes="0"/>
+                  <Component id="BtnCliente" pref="0" max="32767" attributes="0"/>
+                  <Component id="BtnSalir" min="-2" pref="136" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
           </Group>
@@ -52,18 +52,18 @@
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
-                  <Component id="jButton4" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
+                  <Component id="BtnInventario" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
+                  <Component id="BtnCliente" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jButton5" max="32767" attributes="0"/>
-                  <Component id="jButton2" min="-2" pref="65" max="-2" attributes="0"/>
+                  <Component id="BtnContrato" max="32767" attributes="0"/>
+                  <Component id="BtnAlta" min="-2" pref="65" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jButton3" max="32767" attributes="0"/>
-                  <Component id="jButton6" min="-2" pref="65" max="-2" attributes="0"/>
+                  <Component id="BtnBaja" max="32767" attributes="0"/>
+                  <Component id="BtnSalir" min="-2" pref="65" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
           </Group>
@@ -78,35 +78,53 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="BtnInventario">
       <Properties>
         <Property name="text" type="java.lang.String" value="Inventario"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnInventarioActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="BtnAlta">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alta Equipo"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAltaActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="BtnBaja">
       <Properties>
         <Property name="text" type="java.lang.String" value="Baja Equipo"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBajaActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="BtnCliente">
       <Properties>
         <Property name="text" type="java.lang.String" value="Registro Cliente"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnClienteActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton5">
+    <Component class="javax.swing.JButton" name="BtnContrato">
       <Properties>
         <Property name="text" type="java.lang.String" value="Contrato"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnContratoActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton6">
+    <Component class="javax.swing.JButton" name="BtnSalir">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnSalirActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
