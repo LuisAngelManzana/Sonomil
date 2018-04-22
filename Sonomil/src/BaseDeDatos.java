@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.*;
 /**
  *
  * @author Manzana
@@ -88,5 +89,58 @@ public class BaseDeDatos {
             e.printStackTrace();
             return false;
         }
+    }
+    public boolean modificarEquipo(Equipo aEquipo, Equipo nEquipo) {
+        Statement consulta;
+
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("update Cosmeticos set" + 
+                        "Nombre_Equipo = '" + nEquipo.getNombreE() + "'," +
+                        "Num_Existencia = '" + nEquipo.getNumExist() + "'," +
+                        "where id_Equipo= '" + aEquipo.getId_Equipo() + "';");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean eliminarEquipo(Equipo mEquipo) {
+        Statement consulta;
+
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("delete from Equipo" + 
+                        " where id_Equipo = '" + mEquipo.getId_Equipo() + "';");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public ArrayList consultarEquipo() {
+        Equipo mEquipo = null;
+        Statement consulta;
+        ResultSet resultado;
+        ArrayList EquipoArray = new ArrayList();
+        
+        try {
+            
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from Equipo order by Nombre_Equipo");
+            while (resultado.next()) {
+                mEquipo = new Equipo();
+                mEquipo.setId_Equipo(resultado.getString("id_Equipo"));
+                mEquipo.setNombreE(resultado.getString("Nombre_Equipo"));
+                mEquipo.setDescripcion("Descripcion");
+                mEquipo.setNumExist(resultado.getInt("Num_Existencia"));
+                mEquipo.setTipo(resultado.getString("Tipo"));
+                EquipoArray.add(mEquipo);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+            
+        return EquipoArray;        
     }
 }

@@ -147,11 +147,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EliminarBajaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="ModificarBaja">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ModificarBajaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="SalirBaja">
       <Properties>

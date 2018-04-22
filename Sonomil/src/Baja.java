@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,9 +13,8 @@
  */
 public class Baja extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Baja
-     */
+    Equipo mEquipo = new Equipo();
+    BaseDeDatos mBaseDeDatos = new BaseDeDatos();
     public Baja() {
         initComponents();
     }
@@ -60,8 +62,18 @@ public class Baja extends javax.swing.JFrame {
         jLabel3.setText("Existencia");
 
         EliminarBaja.setText("Eliminar");
+        EliminarBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarBajaActionPerformed(evt);
+            }
+        });
 
         ModificarBaja.setText("Modificar");
+        ModificarBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarBajaActionPerformed(evt);
+            }
+        });
 
         SalirBaja.setText("Salir");
         SalirBaja.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +152,31 @@ public class Baja extends javax.swing.JFrame {
         Menu mMenu = new Menu();
         mMenu.show();
     }//GEN-LAST:event_SalirBajaActionPerformed
+
+    private void EliminarBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarBajaActionPerformed
+        mEquipo.setId_Equipo(this.IdBaja.getText());
+        if (mBaseDeDatos.conectar()) {
+            if (mBaseDeDatos.eliminarEquipo(mEquipo)) {
+                JOptionPane.showMessageDialog(rootPane, "Equipo Eliminado con Exito");
+            }
+        }
+        
+    }//GEN-LAST:event_EliminarBajaActionPerformed
+
+    private void ModificarBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarBajaActionPerformed
+        Equipo nCosmeticos = new Equipo();
+        
+        mEquipo.setId_Equipo(this.IdBaja.getText());
+        mEquipo.setNombreE(this.NombreBaja.getText());
+        mEquipo.setNumExist(Integer.parseInt(this.ExistenciaBaja.getText()));
+        if (mBaseDeDatos.conectar()) {
+            if (mBaseDeDatos.modificarEquipo(mEquipo, nCosmeticos)) {
+                JOptionPane.showMessageDialog(rootPane, "Equipo Modificado con Exito");
+            } else{
+                JOptionPane.showMessageDialog(rootPane, "Error al Modificar");
+            }
+        }
+    }//GEN-LAST:event_ModificarBajaActionPerformed
 
     /**
      * @param args the command line arguments

@@ -162,7 +162,7 @@ public class Contrato extends javax.swing.JFrame {
         
         mContrat.setIdContrato(this.IdContrato.getText());
         mContrat.setLugar(this.txt_Lugar.getText());
-        mContrat.setFecha(this.jCalendar1.getText());
+       // mContrat.setFecha(this.jCalendar1.getText());
         mContrat.setHora(this.HoraContrato.getText());
         mContrat.setDuracion(this.DuracionContrato.getText());
 

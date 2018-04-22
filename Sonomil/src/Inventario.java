@@ -1,3 +1,10 @@
+
+import java.util.ArrayList;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +17,16 @@
  */
 public class Inventario extends javax.swing.JFrame {
 
+    public TableRowSorter<TableModel> modeloOrdenado;
+    Equipo mEquipo =new Equipo();
+    BaseDeDatos mBaseDeDatos = new BaseDeDatos();
+    DefaultTableModel modelo = new DefaultTableModel();
     /**
      * Creates new form Inventario
      */
     public Inventario() {
         initComponents();
+        setFilas();
     }
 
     /**
@@ -84,6 +96,47 @@ public class Inventario extends javax.swing.JFrame {
         mMenu.show();
     }//GEN-LAST:event_BtnSalirActionPerformed
 
+    public void setFilas(){
+        Equipo mEquipo;
+        mBaseDeDatos.conectar();
+        ArrayList mEquipoArray = mBaseDeDatos.consultarEquipo();
+        String [] Datos;
+        
+        modelo.addColumn("ID Equipo");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Descripcion");
+        modelo.addColumn("No Existencia");
+        modelo.addColumn("Tipo");
+
+    for (Object mEquipoArrays : mEquipoArray) {
+    Datos = new String[5];
+    mEquipo = (Equipo)mEquipoArrays;
+    Datos[0] = mEquipo.getId_Equipo();
+    Datos[1] = mEquipo.getNombreE();
+    Datos[2] = mEquipo.getDescripcion();
+    Datos[3] = mEquipo.getTipo();
+    Datos[4] = Integer.toString(mEquipo.getNumExist());
+  
+    modelo.addRow(Datos);
+    modeloOrdenado = new TableRowSorter<TableModel>(modelo);
+    //tabla.setRowSorter(modeloOrdenado);
+		modeloOrdenado.setRowFilter(RowFilter.regexFilter("^a", 0));
+    }
+
+    this.jTable1.setModel(modelo);
+    this.jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
+    this.jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
+    this.jTable1.getColumnModel().getColumn(2).setPreferredWidth(400);
+    this.jTable1.getColumnModel().getColumn(3).setPreferredWidth(200);
+    this.jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
+
+    if (this.jTable1.getRowCount() > 0) {
+    //this.jTabla.RowFilter.regexFilter("^a", 0);
+    this.jTable1.setRowSelectionInterval(0, 0);}
+        
+        
+        
+    }
     /**
      * @param args the command line arguments
      */
