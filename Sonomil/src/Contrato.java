@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,6 +12,8 @@
  * @author Manzana
  */
 public class Contrato extends javax.swing.JFrame {
+    Contrat mContrat = new Contrat();
+    BaseDeDatos mBaseDeDatos = new BaseDeDatos();
 
     /**
      * Creates new form Contrato
@@ -35,7 +40,7 @@ public class Contrato extends javax.swing.JFrame {
         HoraContrato = new javax.swing.JTextField();
         DuracionContrato = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txt_Lugar = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         jCalendar1 = new com.toedter.calendar.JCalendar();
         AceptarContrato = new javax.swing.JButton();
@@ -53,13 +58,18 @@ public class Contrato extends javax.swing.JFrame {
 
         jLabel5.setText("Duracion");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txt_Lugar.setColumns(20);
+        txt_Lugar.setRows(5);
+        jScrollPane1.setViewportView(txt_Lugar);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Sonomil-icon.png"))); // NOI18N
 
         AceptarContrato.setText("Aceptar");
+        AceptarContrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AceptarContratoActionPerformed(evt);
+            }
+        });
 
         CancelarContrato.setText("Cancelar");
         CancelarContrato.addActionListener(new java.awt.event.ActionListener() {
@@ -148,6 +158,21 @@ public class Contrato extends javax.swing.JFrame {
         mMenu.show();
     }//GEN-LAST:event_CancelarContratoActionPerformed
 
+    private void AceptarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarContratoActionPerformed
+        
+        mContrat.setIdContrato(this.IdContrato.getText());
+        mContrat.setLugar(this.txt_Lugar.getText());
+        mContrat.setFecha(this.jCalendar1.getText());
+        mContrat.setHora(this.HoraContrato.getText());
+        mContrat.setDuracion(this.DuracionContrato.getText());
+
+        if (mBaseDeDatos.conectar()) {
+            if (mBaseDeDatos.guardarContrato(mContrat)) {
+                JOptionPane.showMessageDialog(rootPane, "Contrato Guardado con Exito");
+            }
+        }
+    }//GEN-LAST:event_AceptarContratoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -197,6 +222,6 @@ public class Contrato extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea txt_Lugar;
     // End of variables declaration//GEN-END:variables
 }

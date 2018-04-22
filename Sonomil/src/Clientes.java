@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,6 +12,8 @@
  * @author manuel
  */
 public class Clientes extends javax.swing.JFrame {
+    Client mClient = new Client();
+    BaseDeDatos mBaseDeDatos = new BaseDeDatos();
 
     /**
      * Creates new form Clientes
@@ -62,6 +67,11 @@ public class Clientes extends javax.swing.JFrame {
         });
 
         BtnGuardarCliente.setText("Guardar Cliente");
+        BtnGuardarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGuardarClienteActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Clientes");
 
@@ -147,6 +157,20 @@ public class Clientes extends javax.swing.JFrame {
         Menu mMenu = new Menu();
         mMenu.show();
     }//GEN-LAST:event_BtnCancelarActionPerformed
+
+    private void BtnGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarClienteActionPerformed
+        
+        mClient.setIdC(this.IdClientes.getText());
+        mClient.setNombreC(this.NombreClientes.getText());
+        mClient.setDomicilioC(this.DomicilioClientes.getText());
+        mClient.setTelefonoC(this.TelefonoClientes.getText());
+
+        if (mBaseDeDatos.conectar()) {
+            if (mBaseDeDatos.guardarCliente(mClient)) {
+                JOptionPane.showMessageDialog(rootPane, "Cliente Guardado con Exito");
+            }
+        }
+    }//GEN-LAST:event_BtnGuardarClienteActionPerformed
 
     /**
      * @param args the command line arguments
