@@ -44,7 +44,8 @@ public class Alta extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         BtnAceptar = new javax.swing.JButton();
         BtnCancelar = new javax.swing.JButton();
-        Tipo = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtPrecio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,6 +65,7 @@ public class Alta extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txt_descrip);
 
         ComboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Luz", "Audio" }));
+        ComboTipo.setToolTipText("");
         ComboTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboTipoActionPerformed(evt);
@@ -85,6 +87,8 @@ public class Alta extends javax.swing.JFrame {
                 BtnCancelarActionPerformed(evt);
             }
         });
+
+        jLabel7.setText("Precio");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,15 +115,15 @@ public class Alta extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(BtnAceptar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtnCancelar)))
+                                .addComponent(BtnCancelar))
+                            .addComponent(jLabel7)
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(60, 60, 60))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txt_exist, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ComboTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, 143, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(232, 232, 232))))
+                        .addGap(406, 406, 406))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,12 +140,17 @@ public class Alta extends javax.swing.JFrame {
                             .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BtnAceptar)
+                            .addComponent(BtnCancelar))
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(BtnAceptar)
-                        .addComponent(BtnCancelar)))
+                    .addComponent(jLabel3))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_exist, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,9 +158,8 @@ public class Alta extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(ComboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(ComboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -162,8 +170,9 @@ public class Alta extends javax.swing.JFrame {
         mEquipo.setNombreE(this.txt_nombre.getText());
         mEquipo.setDescripcion(this.txt_descrip.getText());
         mEquipo.setNumExist(Integer.parseInt(this.txt_exist.getText()));
-        mEquipo.setTipo(this.Tipo.getText());
-        //mEquipo.setTipo(this.ComboTipo);
+        //mEquipo.setTipo(this.Tipo.getText());
+        mEquipo.setTipo(this.ComboTipo.getSelectedItem().toString());
+        mEquipo.setPrecio(Integer.parseInt(this.txtPrecio.getText()));
         if (mBaseDeDatos.conectar()) {
             if (mBaseDeDatos.guardarEquipo(mEquipo)) {
                 JOptionPane.showMessageDialog(rootPane, "Equipo Guardado con Exito");
@@ -220,14 +229,15 @@ public class Alta extends javax.swing.JFrame {
     private javax.swing.JButton BtnAceptar;
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JComboBox<String> ComboTipo;
-    private javax.swing.JTextField Tipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextArea txt_descrip;
     private javax.swing.JTextField txt_exist;
     private javax.swing.JTextField txt_ide;

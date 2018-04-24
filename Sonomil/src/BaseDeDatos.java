@@ -43,12 +43,13 @@ public class BaseDeDatos {
         try {
             consulta = conexion.createStatement();
             consulta.execute("insert into Equipo" + 
-                        "(id_Equipo, Nombre_Equipo, Descripcion, Num_Existencia, Tipo)" +
+                        "(id_Equipo, Nombre_Equipo, Descripcion, Num_Existencia, Tipo, Precio)" +
                         "values ('" + mEquipo.getId_Equipo() + "'," +
                         "'" + mEquipo.getNombreE()+ "'," +
                         "'" + mEquipo.getDescripcion() + "'," +
                         "'" + mEquipo.getNumExist() + "'," +
-                        mEquipo.getTipo() + ");");
+                        "'" + mEquipo.getTipo() + "'," +
+                        "'" + mEquipo.getNumExist() +"');");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,9 +96,10 @@ public class BaseDeDatos {
 
         try {
             consulta = conexion.createStatement();
-            consulta.execute("update Cosmeticos set" + 
+            consulta.execute("update Equipo set" + 
                         "Nombre_Equipo = '" + nEquipo.getNombreE() + "'," +
-                        "Num_Existencia = '" + nEquipo.getNumExist() + "'," +
+                        "Num_Existencia = " + nEquipo.getNumExist() + "," +
+                        "Precio = " + nEquipo.getPrecio() + "," +
                         "where id_Equipo= '" + aEquipo.getId_Equipo() + "';");
             return true;
         } catch (Exception e) {

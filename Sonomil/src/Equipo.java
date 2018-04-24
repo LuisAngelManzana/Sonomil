@@ -10,7 +10,7 @@
  */
 public class Equipo {
     String Id_Equipo, NombreE, Descripcion, Tipo;
-    int NumExist;
+    int NumExist, Precio;
 
     public Equipo() {
         Id_Equipo = "";
@@ -18,6 +18,7 @@ public class Equipo {
         Descripcion = "";
         Tipo = "";
         NumExist = 0;
+        Precio = 0;
     }
 
     public String getId_Equipo() {
@@ -59,6 +60,13 @@ public class Equipo {
     public void setNumExist(int NumExist) {
         this.NumExist = NumExist;
     }
-    
+
+    public int getPrecio() {
+        return Precio;
+    }
+
+    public void setPrecio(int Precio) {
+        this.Precio = Precio;
+    }
     
 }

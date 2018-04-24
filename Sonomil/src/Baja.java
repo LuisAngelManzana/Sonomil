@@ -1,5 +1,10 @@
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,10 +18,13 @@ import javax.swing.JOptionPane;
  */
 public class Baja extends javax.swing.JFrame {
 
+    public TableRowSorter<TableModel> modeloOrdenado;
+    DefaultTableModel modelo = new DefaultTableModel();
     Equipo mEquipo = new Equipo();
     BaseDeDatos mBaseDeDatos = new BaseDeDatos();
     public Baja() {
         initComponents();
+        setFilas();
     }
 
     /**
@@ -39,6 +47,8 @@ public class Baja extends javax.swing.JFrame {
         EliminarBaja = new javax.swing.JButton();
         ModificarBaja = new javax.swing.JButton();
         SalirBaja = new javax.swing.JButton();
+        txtPrecio = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,6 +92,14 @@ public class Baja extends javax.swing.JFrame {
             }
         });
 
+        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Precio");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,7 +120,11 @@ public class Baja extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ExistenciaBaja))))
+                                .addComponent(ExistenciaBaja))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(EliminarBaja)
@@ -111,8 +133,8 @@ public class Baja extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(103, 103, 103)
                         .addComponent(SalirBaja)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -135,7 +157,11 @@ public class Baja extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(ExistenciaBaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(63, 63, 63)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(EliminarBaja)
                             .addComponent(ModificarBaja))
@@ -169,6 +195,7 @@ public class Baja extends javax.swing.JFrame {
         mEquipo.setId_Equipo(this.IdBaja.getText());
         mEquipo.setNombreE(this.NombreBaja.getText());
         mEquipo.setNumExist(Integer.parseInt(this.ExistenciaBaja.getText()));
+        mEquipo.setPrecio(Integer.parseInt(this.txtPrecio.getText()));
         if (mBaseDeDatos.conectar()) {
             if (mBaseDeDatos.modificarEquipo(mEquipo, nCosmeticos)) {
                 JOptionPane.showMessageDialog(rootPane, "Equipo Modificado con Exito");
@@ -178,6 +205,54 @@ public class Baja extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ModificarBajaActionPerformed
 
+    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioActionPerformed
+
+    public void setFilas(){
+        Equipo mEquipo;
+        mBaseDeDatos.conectar();
+        ArrayList mEquipoArray = mBaseDeDatos.consultarEquipo();
+        String [] Datos;
+        
+        modelo.addColumn("ID Equipo");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Descripcion");
+        modelo.addColumn("No Existencia");
+        modelo.addColumn("Tipo");
+        modelo.addColumn("Precio");
+
+    for (Object mEquipoArrays : mEquipoArray) {
+    Datos = new String[6];
+    mEquipo = (Equipo)mEquipoArrays;
+    Datos[0] = mEquipo.getId_Equipo();
+    Datos[1] = mEquipo.getNombreE();
+    Datos[2] = mEquipo.getDescripcion();
+    Datos[3] = Integer.toString(mEquipo.getNumExist());
+    Datos[4] = mEquipo.getTipo();
+    Datos[5] = Integer.toString(mEquipo.getPrecio());
+  
+    modelo.addRow(Datos);
+    modeloOrdenado = new TableRowSorter<TableModel>(modelo);
+    //tabla.setRowSorter(modeloOrdenado);
+		modeloOrdenado.setRowFilter(RowFilter.regexFilter("^a", 0));
+    }
+
+    this.BDBaja.setModel(modelo);
+    this.BDBaja.getColumnModel().getColumn(0).setPreferredWidth(50);
+    this.BDBaja.getColumnModel().getColumn(1).setPreferredWidth(100);
+    this.BDBaja.getColumnModel().getColumn(2).setPreferredWidth(400);
+    this.BDBaja.getColumnModel().getColumn(3).setPreferredWidth(200);
+    this.BDBaja.getColumnModel().getColumn(4).setPreferredWidth(100);
+    this.BDBaja.getColumnModel().getColumn(5).setPreferredWidth(100);
+
+    if (this.BDBaja.getRowCount() > 0) {
+    //this.jTabla.RowFilter.regexFilter("^a", 0);
+    this.BDBaja.setRowSelectionInterval(0, 0);}
+        
+        
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -224,6 +299,8 @@ public class Baja extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

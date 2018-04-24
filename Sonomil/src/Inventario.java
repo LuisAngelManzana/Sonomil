@@ -107,15 +107,17 @@ public class Inventario extends javax.swing.JFrame {
         modelo.addColumn("Descripcion");
         modelo.addColumn("No Existencia");
         modelo.addColumn("Tipo");
+        modelo.addColumn("Precio");
 
     for (Object mEquipoArrays : mEquipoArray) {
-    Datos = new String[5];
+    Datos = new String[6];
     mEquipo = (Equipo)mEquipoArrays;
     Datos[0] = mEquipo.getId_Equipo();
     Datos[1] = mEquipo.getNombreE();
     Datos[2] = mEquipo.getDescripcion();
-    Datos[3] = mEquipo.getTipo();
-    Datos[4] = Integer.toString(mEquipo.getNumExist());
+    Datos[3] = Integer.toString(mEquipo.getNumExist());
+    Datos[4] = mEquipo.getTipo();
+    Datos[5] = Integer.toString(mEquipo.getPrecio());
   
     modelo.addRow(Datos);
     modeloOrdenado = new TableRowSorter<TableModel>(modelo);
@@ -129,6 +131,7 @@ public class Inventario extends javax.swing.JFrame {
     this.jTable1.getColumnModel().getColumn(2).setPreferredWidth(400);
     this.jTable1.getColumnModel().getColumn(3).setPreferredWidth(200);
     this.jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
+    this.jTable1.getColumnModel().getColumn(5).setPreferredWidth(100);
 
     if (this.jTable1.getRowCount() > 0) {
     //this.jTabla.RowFilter.regexFilter("^a", 0);
