@@ -96,11 +96,11 @@ public class BaseDeDatos {
 
         try {
             consulta = conexion.createStatement();
-            consulta.execute("update Equipo set" + 
+            consulta.execute("update Equipo set " + 
                         "Nombre_Equipo = '" + nEquipo.getNombreE() + "'," +
                         "Num_Existencia = " + nEquipo.getNumExist() + "," +
-                        "Precio = " + nEquipo.getPrecio() + "," +
-                        "where id_Equipo= '" + aEquipo.getId_Equipo() + "';");
+                        "Precio = " + nEquipo.getPrecio() +
+                        " where id_Equipo= '" + aEquipo.getId_Equipo() + "';");
             return true;
         } catch (Exception e) {
             e.printStackTrace();

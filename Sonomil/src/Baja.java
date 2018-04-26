@@ -63,6 +63,11 @@ public class Baja extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        BDBaja.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BDBajaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(BDBaja);
 
         jLabel1.setText("ID");
@@ -190,14 +195,14 @@ public class Baja extends javax.swing.JFrame {
     }//GEN-LAST:event_EliminarBajaActionPerformed
 
     private void ModificarBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarBajaActionPerformed
-        Equipo nCosmeticos = new Equipo();
+        Equipo nEquipo = new Equipo();
         
         mEquipo.setId_Equipo(this.IdBaja.getText());
         mEquipo.setNombreE(this.NombreBaja.getText());
         mEquipo.setNumExist(Integer.parseInt(this.ExistenciaBaja.getText()));
         mEquipo.setPrecio(Integer.parseInt(this.txtPrecio.getText()));
         if (mBaseDeDatos.conectar()) {
-            if (mBaseDeDatos.modificarEquipo(mEquipo, nCosmeticos)) {
+            if (mBaseDeDatos.modificarEquipo(mEquipo, nEquipo)) {
                 JOptionPane.showMessageDialog(rootPane, "Equipo Modificado con Exito");
             } else{
                 JOptionPane.showMessageDialog(rootPane, "Error al Modificar");
@@ -208,6 +213,14 @@ public class Baja extends javax.swing.JFrame {
     private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecioActionPerformed
+
+    private void BDBajaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BDBajaMouseClicked
+        int rec = this.BDBaja.getSelectedRow();
+        this.IdBaja.setText(BDBaja.getValueAt(rec, 0).toString());
+        this.NombreBaja.setText(BDBaja.getValueAt(rec, 1).toString());
+        this.ExistenciaBaja.setText(BDBaja.getValueAt(rec, 2).toString());
+        this.txtPrecio.setText(BDBaja.getValueAt(rec, 3).toString());
+    }//GEN-LAST:event_BDBajaMouseClicked
 
     public void setFilas(){
         Equipo mEquipo;
@@ -239,10 +252,10 @@ public class Baja extends javax.swing.JFrame {
     }
 
     this.BDBaja.setModel(modelo);
-    this.BDBaja.getColumnModel().getColumn(0).setPreferredWidth(50);
-    this.BDBaja.getColumnModel().getColumn(1).setPreferredWidth(100);
+    this.BDBaja.getColumnModel().getColumn(0).setPreferredWidth(80);
+    this.BDBaja.getColumnModel().getColumn(1).setPreferredWidth(120);
     this.BDBaja.getColumnModel().getColumn(2).setPreferredWidth(400);
-    this.BDBaja.getColumnModel().getColumn(3).setPreferredWidth(200);
+    this.BDBaja.getColumnModel().getColumn(3).setPreferredWidth(100);
     this.BDBaja.getColumnModel().getColumn(4).setPreferredWidth(100);
     this.BDBaja.getColumnModel().getColumn(5).setPreferredWidth(100);
 

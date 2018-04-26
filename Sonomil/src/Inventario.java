@@ -126,10 +126,10 @@ public class Inventario extends javax.swing.JFrame {
     }
 
     this.jTable1.setModel(modelo);
-    this.jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
-    this.jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
-    this.jTable1.getColumnModel().getColumn(2).setPreferredWidth(400);
-    this.jTable1.getColumnModel().getColumn(3).setPreferredWidth(200);
+    this.jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
+    this.jTable1.getColumnModel().getColumn(1).setPreferredWidth(120);
+    this.jTable1.getColumnModel().getColumn(2).setPreferredWidth(500);
+    this.jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
     this.jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
     this.jTable1.getColumnModel().getColumn(5).setPreferredWidth(100);
 
