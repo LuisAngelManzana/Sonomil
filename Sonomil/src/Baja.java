@@ -198,16 +198,20 @@ public class Baja extends javax.swing.JFrame {
         Equipo nEquipo = new Equipo();
         
         mEquipo.setId_Equipo(this.IdBaja.getText());
-        mEquipo.setNombreE(this.NombreBaja.getText());
-        mEquipo.setNumExist(Integer.parseInt(this.ExistenciaBaja.getText()));
-        mEquipo.setPrecio(Integer.parseInt(this.txtPrecio.getText()));
+        nEquipo.setNombreE(this.NombreBaja.getText());
+        nEquipo.setNumExist(Integer.parseInt(this.ExistenciaBaja.getText()));
+        nEquipo.setPrecio(Integer.parseInt(this.txtPrecio.getText()));
         if (mBaseDeDatos.conectar()) {
             if (mBaseDeDatos.modificarEquipo(mEquipo, nEquipo)) {
                 JOptionPane.showMessageDialog(rootPane, "Equipo Modificado con Exito");
+                modelo.setColumnCount(0);
+                modelo.setRowCount(0);
+                setFilas();
             } else{
                 JOptionPane.showMessageDialog(rootPane, "Error al Modificar");
             }
         }
+
     }//GEN-LAST:event_ModificarBajaActionPerformed
 
     private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
@@ -218,14 +222,15 @@ public class Baja extends javax.swing.JFrame {
         int rec = this.BDBaja.getSelectedRow();
         this.IdBaja.setText(BDBaja.getValueAt(rec, 0).toString());
         this.NombreBaja.setText(BDBaja.getValueAt(rec, 1).toString());
-        this.ExistenciaBaja.setText(BDBaja.getValueAt(rec, 2).toString());
-        this.txtPrecio.setText(BDBaja.getValueAt(rec, 3).toString());
+        this.ExistenciaBaja.setText(BDBaja.getValueAt(rec, 3).toString());
+        this.txtPrecio.setText(BDBaja.getValueAt(rec, 5).toString());
     }//GEN-LAST:event_BDBajaMouseClicked
 
     public void setFilas(){
         Equipo mEquipo;
         mBaseDeDatos.conectar();
-        ArrayList mEquipoArray = mBaseDeDatos.consultarEquipo();
+        ArrayList mArrayList = new ArrayList();
+        mArrayList = mBaseDeDatos.consultarEquipo();
         String [] Datos;
         
         modelo.addColumn("ID Equipo");
@@ -235,7 +240,7 @@ public class Baja extends javax.swing.JFrame {
         modelo.addColumn("Tipo");
         modelo.addColumn("Precio");
 
-    for (Object mEquipoArrays : mEquipoArray) {
+    for (Object mEquipoArrays : mArrayList) {
     Datos = new String[6];
     mEquipo = (Equipo)mEquipoArrays;
     Datos[0] = mEquipo.getId_Equipo();

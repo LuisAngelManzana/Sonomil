@@ -91,16 +91,16 @@ public class BaseDeDatos {
             return false;
         }
     }
-    public boolean modificarEquipo(Equipo aEquipo, Equipo nEquipo) {
+    public boolean modificarEquipo(Equipo mEquipo, Equipo nEquipo) {
         Statement consulta;
-
+        
         try {
             consulta = conexion.createStatement();
             consulta.execute("update Equipo set " + 
                         "Nombre_Equipo = '" + nEquipo.getNombreE() + "'," +
                         "Num_Existencia = " + nEquipo.getNumExist() + "," +
                         "Precio = " + nEquipo.getPrecio() +
-                        " where id_Equipo= '" + aEquipo.getId_Equipo() + "';");
+                        " where id_Equipo= '" + mEquipo.getId_Equipo() + "';");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -129,14 +129,15 @@ public class BaseDeDatos {
         try {
             
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select * from Equipo order by Nombre_Equipo");
+            resultado = consulta.executeQuery("select * from Equipo order by id_Equipo");
             while (resultado.next()) {
                 mEquipo = new Equipo();
                 mEquipo.setId_Equipo(resultado.getString("id_Equipo"));
                 mEquipo.setNombreE(resultado.getString("Nombre_Equipo"));
-                mEquipo.setDescripcion("Descripcion");
+                mEquipo.setDescripcion(resultado.getString("Descripcion"));
                 mEquipo.setNumExist(resultado.getInt("Num_Existencia"));
                 mEquipo.setTipo(resultado.getString("Tipo"));
+                mEquipo.setPrecio(resultado.getInt("Precio"));
                 EquipoArray.add(mEquipo);
             }
         } catch (Exception e) {
@@ -144,5 +145,29 @@ public class BaseDeDatos {
         }
             
         return EquipoArray;        
+    }
+    
+    public ArrayList consultarCliente() {
+        Client mCliente = null;
+        Statement consulta;
+        ResultSet resultado;
+        ArrayList ClienteArray = new ArrayList();
+        
+        try {
+            
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from Cliente order by Nombre");
+            while (resultado.next()) {
+                mCliente = new Client();
+                mCliente.setIdC(resultado.getString("id_Cliente"));
+                mCliente.setNombreC(resultado.getString("Nombre"));
+                mCliente.setTelefonoC(resultado.getString("Telefono"));
+                ClienteArray.add(mCliente);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+            
+        return ClienteArray;        
     }
 }
