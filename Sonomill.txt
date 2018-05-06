@@ -1,0 +1,23 @@
+Al abrir nuestro proyecto este abrira una interfaz con difentes tipos de opciones, asi tambien como un boton para Salir del proyecto.
+
+Inventario: Esta Opcion nos llevara a una nueva interfaz la cual nos mostrara todo el inventario que hemos añadido y tambien cuenta con un boton llamado "Imprimir"
+este hace que se habra un reporte con todo el equipo que tengamos disponible.
+
+Alta Equipo: La opcion de "Alta Equipo" contara con difentes campos que añadiremos datos a cada uno de ellos, estos son el id, Nombre, Descripción, Existencia, Tipo y 
+Precio y tambien un boton "Aceptar" para que guarde el equipo.
+
+Baja Equipo: La opcion "Baja Equipo" consta con diferentes campos, asi que primero tendremos seleccionar algun Equipo dentro del Inventario, este auto rellenara los 
+campos y tendremos dos botones, el boton "Eliminar" que al seleccionarlo eliminara directamente el equipo seleccionado y nos mostrara un mensaje de que el equipo ha sido eliminado 
+ 
+Para modificar tambien tendremos que seleccionar algun equipo, este llenara los campos y tendremos que hacer las modificaciones que querramos al terminar seleccionamos
+el boton "Modificar" y nos aparecera un mensaje de confirmacion.
+
+Registro Cliente: Para añadir un cliente procederemos a añadir los datos que se piden y en el boton "Registrar Cliente" para guardarlo en la base de datos.
+
+Contrato: Para la opcion del contrato tendremos que llenar el id del contrato, Hora, Lugar, Duracion y 
+Fecha(Para esta opcion, seleccionaremos el dia en el calendario que aparece en la interfaz), tambien tendremos que seleccionar el Cliente, asi como tambien agregar el 
+equipo y agregar la cantidad de equipos que utilizaremos
+
+*Para poder usar el Calendario debemos instalar JavaCalendar y Jasper Reports
+*La bd viene en la raiz con el registro de productos 
+*Todo lo necesario viene en la carpeta de complementos
