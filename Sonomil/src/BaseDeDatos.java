@@ -84,12 +84,13 @@ public class BaseDeDatos {
         try {
             consulta = conexion.createStatement();
             consulta.execute("insert into Contrato" + 
-                        "(id_Contrato, Fecha, Hora, Lugar, Duracion)" +
+                        "(id_Contrato, Fecha, Hora, Lugar, Duracion, PrecioTotal)" +
                         "values ('" + mContrat.getIdContrato() + "'," +
                         "'" + mContrat.getFecha()+ "'," +
                         "'" + mContrat.getHora() + "'," +
                         "'" + mContrat.getLugar() + "'," +
-                        mContrat.getDuracion() + ");");
+                        "'" + mContrat.getDuracion() + "'," +
+                        mContrat.getPrecioTotal() + ");");
             return true;
         } catch (Exception e) {
             e.printStackTrace();

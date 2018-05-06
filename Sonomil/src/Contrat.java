@@ -10,6 +10,15 @@
  */
 public class Contrat {
     String IdContrato, Hora, Lugar, Duracion, Fecha;
+    int PrecioTotal;
+
+    public int getPrecioTotal() {
+        return PrecioTotal;
+    }
+
+    public void setPrecioTotal(int PrecioTotal) {
+        this.PrecioTotal = PrecioTotal;
+    }
 
     public Contrat() {
         IdContrato = "";
@@ -17,6 +26,7 @@ public class Contrat {
         Lugar = "";
         Duracion = "";
         Fecha = "";
+        PrecioTotal = 0;
     }
 
     public String getIdContrato() {

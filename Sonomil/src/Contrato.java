@@ -1,10 +1,18 @@
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,6 +31,8 @@ public class Contrato extends javax.swing.JFrame {
     DefaultTableModel modelo2 = new DefaultTableModel();
     DefaultTableModel modelo3 = new DefaultTableModel();
     
+    int PrecioTotal = 0;
+    int Pre=0;
     
     Client mCliente = new Client();
     public TableRowSorter<TableModel> modeloOrdenado;
@@ -75,6 +85,9 @@ public class Contrato extends javax.swing.JFrame {
         TSeleccion = new javax.swing.JTable();
         BAgregar = new javax.swing.JButton();
         TNumA = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        LabelTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -174,6 +187,12 @@ public class Contrato extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setText("Cantidad");
+
+        jLabel10.setText("Total");
+
+        LabelTotal.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -201,32 +220,41 @@ public class Contrato extends javax.swing.JFrame {
                             .addComponent(DuracionContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(132, 132, 132)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(AceptarContrato)
+                        .addGap(18, 18, 18)
+                        .addComponent(CancelarContrato)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2))
-                            .addComponent(jLabel8))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel2))
+                                    .addComponent(jLabel8))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BAgregar)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(AceptarContrato)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CancelarContrato)
-                .addGap(18, 18, 18)
-                .addComponent(BAgregar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TNumA, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(141, 141, 141))
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(TNumA, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(174, 174, 174)
+                        .addComponent(jLabel10)
+                        .addGap(28, 28, 28)
+                        .addComponent(LabelTotal)
+                        .addGap(67, 67, 67))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,11 +297,16 @@ public class Contrato extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AceptarContrato)
-                    .addComponent(CancelarContrato)
-                    .addComponent(BAgregar)
-                    .addComponent(TNumA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(AceptarContrato)
+                        .addComponent(CancelarContrato))
+                    .addComponent(TNumA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BAgregar)
+                        .addComponent(jLabel9)
+                        .addComponent(jLabel10)
+                        .addComponent(LabelTotal)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -293,11 +326,26 @@ public class Contrato extends javax.swing.JFrame {
         mContrat.setFecha(this.jCalendar1.getDate().toString());
         mContrat.setHora(this.HoraContrato.getText());
         mContrat.setDuracion(this.DuracionContrato.getText());
+        mContrat.setPrecioTotal(this.PrecioTotal);
 
         if (mBaseDeDatos.conectar()) {
             if (mBaseDeDatos.guardarContrato(mContrat)) {
                 JOptionPane.showMessageDialog(rootPane, "Contrato Guardado con Exito");
             }
+        }
+        
+        Conector cn = new Conector("root","root","Sonomil","localhost:8888");
+        String path = "/Users/admin/Sonomil/Sonomil/src/report_contrat.jasper";
+        JasperReport jr = null;
+        
+        try {
+            jr =(JasperReport) JRLoader.loadObjectFromLocation(path);
+            JasperPrint jpInv = JasperFillManager.fillReport(jr, null, cn.getConexion());
+            JasperViewer jv = new JasperViewer(jpInv);
+            jv.setVisible(true);
+            jv.setTitle(path);
+        } catch (JRException ex) {
+            Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_AceptarContratoActionPerformed
 
@@ -329,6 +377,7 @@ public class Contrato extends javax.swing.JFrame {
         /*modelo3.addColumn("ID Equipo");
         modelo3.addColumn("Nombre");
         modelo3.addColumn("Tipo");*/
+        String P = Integer.toString((NE) * Integer.parseInt(TEquipo.getValueAt(filaSeleccionada, 3).toString()));
 
        if (filaSeleccionada>=0) {
         DatosS = new String[4];
@@ -336,7 +385,7 @@ public class Contrato extends javax.swing.JFrame {
         DatosS[0] = TEquipo.getValueAt(filaSeleccionada, 0).toString();
         DatosS[1] = TEquipo.getValueAt(filaSeleccionada, 1).toString();
         DatosS[2] = TEquipo.getValueAt(filaSeleccionada, 2).toString();
-        DatosS[3] = Integer.toString((NE) * Integer.parseInt(TEquipo.getValueAt(filaSeleccionada, 3).toString()));
+        DatosS[3] = P;
   
           modelo3.addRow(DatosS);
          // modeloOrdenado = new TableRowSorter<TableModel>(modelo);
@@ -349,6 +398,12 @@ public class Contrato extends javax.swing.JFrame {
     this.TSeleccion.getColumnModel().getColumn(1).setPreferredWidth(200);
     this.TSeleccion.getColumnModel().getColumn(2).setPreferredWidth(200);
     this.TSeleccion.getColumnModel().getColumn(3).setPreferredWidth(200);
+    
+    Pre = Integer.parseInt(P);
+    PrecioTotal = PrecioTotal + Pre;
+    LabelTotal.setText("$" + PrecioTotal);
+    //--------------------------------------------------------------------------------------
+    
         
     }//GEN-LAST:event_BAgregarActionPerformed
 
@@ -470,6 +525,7 @@ public class Contrato extends javax.swing.JFrame {
     private javax.swing.JTextField DuracionContrato;
     private javax.swing.JTextField HoraContrato;
     private javax.swing.JTextField IdContrato;
+    private javax.swing.JLabel LabelTotal;
     private javax.swing.JTable TCliente;
     private javax.swing.JTable TEquipo;
     private javax.swing.JTextField TIC;
@@ -477,6 +533,7 @@ public class Contrato extends javax.swing.JFrame {
     private javax.swing.JTable TSeleccion;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -484,6 +541,7 @@ public class Contrato extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
