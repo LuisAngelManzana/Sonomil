@@ -1,9 +1,17 @@
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -41,6 +49,7 @@ public class Inventario extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         BtnSalir = new javax.swing.JButton();
+        BImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,6 +73,13 @@ public class Inventario extends javax.swing.JFrame {
             }
         });
 
+        BImprimir.setText("Imprimir");
+        BImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,10 +88,12 @@ public class Inventario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(259, 259, 259)
                 .addComponent(BtnSalir)
-                .addGap(315, 315, 315))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BImprimir)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,7 +101,9 @@ public class Inventario extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(BtnSalir)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnSalir)
+                    .addComponent(BImprimir))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -95,6 +115,24 @@ public class Inventario extends javax.swing.JFrame {
         Menu mMenu = new Menu();
         mMenu.show();
     }//GEN-LAST:event_BtnSalirActionPerformed
+
+    private void BImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BImprimirActionPerformed
+
+        Conector cn = new Conector("root","root","Sonomil","localhost:8888");
+        String path = "/Users/admin/Sonomil/Sonomil/src/reporte_Inventario.jasper";
+        JasperReport jr = null;
+        
+        try {
+            jr =(JasperReport) JRLoader.loadObjectFromLocation(path);
+            JasperPrint jpInv = JasperFillManager.fillReport(jr, null, cn.getConexion());
+            JasperViewer jv = new JasperViewer(jpInv);
+            jv.setVisible(true);
+            jv.setTitle(path);
+        } catch (JRException ex) {
+            Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_BImprimirActionPerformed
 
     public void setFilas(){
         Equipo mEquipo;
@@ -176,6 +214,7 @@ public class Inventario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BImprimir;
     private javax.swing.JButton BtnSalir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

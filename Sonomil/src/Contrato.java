@@ -21,6 +21,9 @@ public class Contrato extends javax.swing.JFrame {
     BaseDeDatos mBaseDeDatos = new BaseDeDatos();
     DefaultTableModel modelo = new DefaultTableModel();
     DefaultTableModel modelo2 = new DefaultTableModel();
+    DefaultTableModel modelo3 = new DefaultTableModel();
+    
+    
     Client mCliente = new Client();
     public TableRowSorter<TableModel> modeloOrdenado;
 
@@ -31,6 +34,11 @@ public class Contrato extends javax.swing.JFrame {
         initComponents();
         setClienteBD();
         setEquipoBD();
+        
+        modelo3.addColumn("ID Equipo");
+        modelo3.addColumn("Nombre");
+        modelo3.addColumn("Tipo");
+        modelo3.addColumn("Precio");
     }
 
     /**
@@ -65,6 +73,8 @@ public class Contrato extends javax.swing.JFrame {
         TEquipo = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         TSeleccion = new javax.swing.JTable();
+        BAgregar = new javax.swing.JButton();
+        TNumA = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,6 +141,11 @@ public class Contrato extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TEquipo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TEquipoMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(TEquipo);
 
         TSeleccion.setModel(new javax.swing.table.DefaultTableModel(
@@ -145,6 +160,19 @@ public class Contrato extends javax.swing.JFrame {
             }
         ));
         jScrollPane4.setViewportView(TSeleccion);
+
+        BAgregar.setText("Agregar");
+        BAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BAgregarActionPerformed(evt);
+            }
+        });
+
+        TNumA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TNumAActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -194,7 +222,11 @@ public class Contrato extends javax.swing.JFrame {
                 .addComponent(AceptarContrato)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CancelarContrato)
-                .addGap(390, 390, 390))
+                .addGap(18, 18, 18)
+                .addComponent(BAgregar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TNumA, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(141, 141, 141))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,9 +255,8 @@ public class Contrato extends javax.swing.JFrame {
                                     .addComponent(jLabel4))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel5)
                     .addComponent(DuracionContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -240,7 +271,9 @@ public class Contrato extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AceptarContrato)
-                    .addComponent(CancelarContrato))
+                    .addComponent(CancelarContrato)
+                    .addComponent(BAgregar)
+                    .addComponent(TNumA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -257,7 +290,7 @@ public class Contrato extends javax.swing.JFrame {
         
         mContrat.setIdContrato(this.IdContrato.getText());
         mContrat.setLugar(this.txt_Lugar.getText());
-       mContrat.setFecha(this.jCalendar1.getDate().toString());
+        mContrat.setFecha(this.jCalendar1.getDate().toString());
         mContrat.setHora(this.HoraContrato.getText());
         mContrat.setDuracion(this.DuracionContrato.getText());
 
@@ -273,6 +306,51 @@ public class Contrato extends javax.swing.JFrame {
         this.TIC.setText(TCliente.getValueAt(rec, 0).toString());
 
     }//GEN-LAST:event_TClienteMouseClicked
+
+    private void TEquipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TEquipoMouseClicked
+        if (evt.getClickCount()> 1)
+            {
+                System.out.println(TEquipo.getValueAt(TEquipo.getSelectedRow(), 0).toString());
+            }
+    }//GEN-LAST:event_TEquipoMouseClicked
+
+    private void TNumAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TNumAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TNumAActionPerformed
+
+    private void BAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAgregarActionPerformed
+        Equipo mEquipo;
+        int filaSeleccionada=TEquipo.getSelectedRow();
+        mBaseDeDatos.conectar();
+        String [] DatosS;
+        
+        int NE = (Integer.parseInt(this.TNumA.getText()));
+        
+        /*modelo3.addColumn("ID Equipo");
+        modelo3.addColumn("Nombre");
+        modelo3.addColumn("Tipo");*/
+
+       if (filaSeleccionada>=0) {
+        DatosS = new String[4];
+        //mEquipo = (Equipo)mEquipoArrays;
+        DatosS[0] = TEquipo.getValueAt(filaSeleccionada, 0).toString();
+        DatosS[1] = TEquipo.getValueAt(filaSeleccionada, 1).toString();
+        DatosS[2] = TEquipo.getValueAt(filaSeleccionada, 2).toString();
+        DatosS[3] = Integer.toString((NE) * Integer.parseInt(TEquipo.getValueAt(filaSeleccionada, 3).toString()));
+  
+          modelo3.addRow(DatosS);
+         // modeloOrdenado = new TableRowSorter<TableModel>(modelo);
+    //tabla.setRowSorter(modeloOrdenado);
+		//modeloOrdenado.setRowFilter(RowFilter.regexFilter("^a", 0));
+    }
+
+    this.TSeleccion.setModel(modelo3);
+    this.TSeleccion.getColumnModel().getColumn(0).setPreferredWidth(80);
+    this.TSeleccion.getColumnModel().getColumn(1).setPreferredWidth(200);
+    this.TSeleccion.getColumnModel().getColumn(2).setPreferredWidth(200);
+    this.TSeleccion.getColumnModel().getColumn(3).setPreferredWidth(200);
+        
+    }//GEN-LAST:event_BAgregarActionPerformed
 
     public void setClienteBD(){
         Client mCliente;
@@ -320,13 +398,15 @@ public class Contrato extends javax.swing.JFrame {
         modelo.addColumn("ID Equipo");
         modelo.addColumn("Nombre");
         modelo.addColumn("Tipo");
+        modelo.addColumn("Precio");
 
     for (Object mEquipoArrays : mEquipoArray) {
-    DatosE = new String[3];
+    DatosE = new String[4];
     mEquipo = (Equipo)mEquipoArrays;
     DatosE[0] = mEquipo.getId_Equipo();
     DatosE[1] = mEquipo.getNombreE();
     DatosE[2] = mEquipo.getTipo();
+    DatosE[3] = Integer.toString(mEquipo.getPrecio());
   
     modelo.addRow(DatosE);
     modeloOrdenado = new TableRowSorter<TableModel>(modelo);
@@ -338,6 +418,7 @@ public class Contrato extends javax.swing.JFrame {
     this.TEquipo.getColumnModel().getColumn(0).setPreferredWidth(80);
     this.TEquipo.getColumnModel().getColumn(1).setPreferredWidth(200);
     this.TEquipo.getColumnModel().getColumn(2).setPreferredWidth(200);
+    this.TEquipo.getColumnModel().getColumn(3).setPreferredWidth(200);
 
     if (this.TEquipo.getRowCount() > 0) {
     //this.jTabla.RowFilter.regexFilter("^a", 0);
@@ -377,12 +458,14 @@ public class Contrato extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Contrato().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AceptarContrato;
+    private javax.swing.JButton BAgregar;
     private javax.swing.JButton CancelarContrato;
     private javax.swing.JTextField DuracionContrato;
     private javax.swing.JTextField HoraContrato;
@@ -390,6 +473,7 @@ public class Contrato extends javax.swing.JFrame {
     private javax.swing.JTable TCliente;
     private javax.swing.JTable TEquipo;
     private javax.swing.JTextField TIC;
+    private javax.swing.JTextField TNumA;
     private javax.swing.JTable TSeleccion;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;

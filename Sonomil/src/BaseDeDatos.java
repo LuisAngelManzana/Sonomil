@@ -30,6 +30,11 @@ public class BaseDeDatos {
             return false;
         }
     }
+    public Connection getConexion() {
+
+        return this.conexion;
+
+    }
     public void desconectar() {
         try {
             this.conexion.close();

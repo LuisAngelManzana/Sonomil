@@ -10,7 +10,7 @@
  */
 public class Equipo {
     String Id_Equipo, NombreE, Descripcion, Tipo;
-    int NumExist, Precio;
+    int NumExist, Precio, NumS;
 
     public Equipo() {
         Id_Equipo = "";
@@ -19,6 +19,15 @@ public class Equipo {
         Tipo = "";
         NumExist = 0;
         Precio = 0;
+        NumS = 0;
+    }
+
+    public int getNumS() {
+        return NumS;
+    }
+
+    public void setNumS(int NumS) {
+        this.NumS = NumS;
     }
 
     public String getId_Equipo() {
