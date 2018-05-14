@@ -30,12 +30,10 @@ public class Alta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txt_ide = new javax.swing.JTextField();
         txt_nombre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_descrip = new javax.swing.JTextArea();
@@ -48,8 +46,6 @@ public class Alta extends javax.swing.JFrame {
         txtPrecio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("ID Equipo");
 
         jLabel2.setText("Nombre");
         jLabel2.setToolTipText("");
@@ -106,13 +102,11 @@ public class Alta extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_ide)
                             .addComponent(txt_nombre)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
@@ -136,14 +130,9 @@ public class Alta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_ide, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -172,10 +161,11 @@ public class Alta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarActionPerformed
-        mEquipo.setId_Equipo(this.txt_ide.getText());
+        //mEquipo.setId_Equipo(this.txt_ide.getText());
         mEquipo.setNombreE(this.txt_nombre.getText());
         mEquipo.setDescripcion(this.txt_descrip.getText());
         mEquipo.setNumExist(Integer.parseInt(this.txt_exist.getText()));
+        //mEquipo.setER(Integer.parseInt(this.txt_exist.getText()));
         //mEquipo.setTipo(this.Tipo.getText());
         mEquipo.setTipo(this.ComboTipo.getSelectedItem().toString());
         mEquipo.setPrecio(Integer.parseInt(this.txtPrecio.getText()));
@@ -184,6 +174,9 @@ public class Alta extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Equipo Guardado con Exito");
             }
         }
+        this.hide();
+        Menu mMenu = new Menu();
+        mMenu.show();
     }//GEN-LAST:event_BtnAceptarActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
@@ -239,7 +232,6 @@ public class Alta extends javax.swing.JFrame {
     private javax.swing.JButton BtnAceptar;
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JComboBox<String> ComboTipo;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -250,7 +242,6 @@ public class Alta extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextArea txt_descrip;
     private javax.swing.JTextField txt_exist;
-    private javax.swing.JTextField txt_ide;
     private javax.swing.JTextField txt_nombre;
     // End of variables declaration//GEN-END:variables
 }

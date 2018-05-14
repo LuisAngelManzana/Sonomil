@@ -9,7 +9,7 @@
  * @author Manzana
  */
 public class Client {
-    String IdC, NombreC, DomicilioC, TelefonoC;
+    String  IdC, NombreC, DomicilioC, TelefonoC;
 
     public Client() {
         IdC = "";
@@ -25,6 +25,7 @@ public class Client {
     public void setIdC(String IdC) {
         this.IdC = IdC;
     }
+
 
     public String getNombreC() {
         return NombreC;

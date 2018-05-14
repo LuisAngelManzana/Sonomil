@@ -29,7 +29,6 @@
                   <Component id="Domcilio" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="TelefonoCliente" alignment="0" max="32767" attributes="0"/>
                   <Component id="NombreCliente" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="Id" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -39,7 +38,6 @@
                       <Component id="BtnCancelar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="IdClientes" alignment="0" max="32767" attributes="0"/>
                       <Component id="TelefonoClientes" alignment="0" max="32767" attributes="0"/>
                       <Component id="NombreClientes" alignment="0" max="32767" attributes="0"/>
                       <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
@@ -55,12 +53,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" pref="27" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="IdClientes" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Id" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="NombreClientes" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
@@ -73,7 +66,7 @@
                   <Component id="Domcilio" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="14" max="32767" attributes="0"/>
+              <EmptySpace pref="17" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="TelefonoCliente" max="32767" attributes="0"/>
                   <Component id="TelefonoClientes" min="-2" max="-2" attributes="0"/>
@@ -89,11 +82,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="Id">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="ID"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="NombreCliente">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nombre"/>
@@ -108,11 +96,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Telefono"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="IdClientes">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IdClientesActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="NombreClientes">
     </Component>

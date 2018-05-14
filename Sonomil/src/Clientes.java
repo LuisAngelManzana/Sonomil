@@ -31,11 +31,9 @@ public class Clientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Id = new javax.swing.JLabel();
         NombreCliente = new javax.swing.JLabel();
         Domcilio = new javax.swing.JLabel();
         TelefonoCliente = new javax.swing.JLabel();
-        IdClientes = new javax.swing.JTextField();
         NombreClientes = new javax.swing.JTextField();
         TelefonoClientes = new javax.swing.JTextField();
         BtnGuardarCliente = new javax.swing.JButton();
@@ -46,19 +44,11 @@ public class Clientes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Id.setText("ID");
-
         NombreCliente.setText("Nombre");
 
         Domcilio.setText("Domicilio");
 
         TelefonoCliente.setText("Telefono");
-
-        IdClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IdClientesActionPerformed(evt);
-            }
-        });
 
         TelefonoClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,8 +85,7 @@ public class Clientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Domcilio)
                     .addComponent(TelefonoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(NombreCliente)
-                    .addComponent(Id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(NombreCliente))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -104,7 +93,6 @@ public class Clientes extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnCancelar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(IdClientes, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(TelefonoClientes, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(NombreClientes, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -116,11 +104,7 @@ public class Clientes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(IdClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Id, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(NombreClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -130,7 +114,7 @@ public class Clientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Domcilio)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(TelefonoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TelefonoClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -144,10 +128,6 @@ public class Clientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void IdClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdClientesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_IdClientesActionPerformed
-
     private void TelefonoClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TelefonoClientesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TelefonoClientesActionPerformed
@@ -160,7 +140,7 @@ public class Clientes extends javax.swing.JFrame {
 
     private void BtnGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarClienteActionPerformed
         
-        mClient.setIdC(this.IdClientes.getText());
+        //mClient.setIdC(this.IdClientes.getText());
         mClient.setNombreC(this.NombreClientes.getText());
         mClient.setDomicilioC(this.DomicilioClientes.getText());
         mClient.setTelefonoC(this.TelefonoClientes.getText());
@@ -170,6 +150,9 @@ public class Clientes extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Cliente Guardado con Exito");
             }
         }
+        this.hide();
+        Menu mMenu = new Menu();
+        mMenu.show();
     }//GEN-LAST:event_BtnGuardarClienteActionPerformed
 
     /**
@@ -212,8 +195,6 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JButton BtnGuardarCliente;
     private javax.swing.JLabel Domcilio;
     private javax.swing.JTextArea DomicilioClientes;
-    private javax.swing.JLabel Id;
-    private javax.swing.JTextField IdClientes;
     private javax.swing.JLabel NombreCliente;
     private javax.swing.JTextField NombreClientes;
     private javax.swing.JLabel TelefonoCliente;

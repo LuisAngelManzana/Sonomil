@@ -1,4 +1,5 @@
 
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +27,8 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class Contrato extends javax.swing.JFrame {
     Contrat mContrat = new Contrat();
+    Equipo mE = new Equipo();
+    Equipo mEquipo = new Equipo();
     BaseDeDatos mBaseDeDatos = new BaseDeDatos();
     DefaultTableModel modelo = new DefaultTableModel();
     DefaultTableModel modelo2 = new DefaultTableModel();
@@ -33,6 +36,7 @@ public class Contrato extends javax.swing.JFrame {
     
     int PrecioTotal = 0;
     int Pre=0;
+    int NE;
     
     Client mCliente = new Client();
     public TableRowSorter<TableModel> modeloOrdenado;
@@ -60,12 +64,10 @@ public class Contrato extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        IdContrato = new javax.swing.JTextField();
         HoraContrato = new javax.swing.JTextField();
         DuracionContrato = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -90,8 +92,6 @@ public class Contrato extends javax.swing.JFrame {
         LabelTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("ID Contrato");
 
         jLabel2.setText("Fecha");
 
@@ -198,12 +198,11 @@ public class Contrato extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel1)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel7))
@@ -211,7 +210,6 @@ public class Contrato extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(HoraContrato)
-                                .addComponent(IdContrato)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(22, 22, 22)
@@ -219,10 +217,10 @@ public class Contrato extends javax.swing.JFrame {
                             .addComponent(TIC, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(DuracionContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
+                        .addGap(27, 27, 27)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
+                        .addGap(104, 104, 104)
                         .addComponent(AceptarContrato)
                         .addGap(18, 18, 18)
                         .addComponent(CancelarContrato)))
@@ -269,11 +267,7 @@ public class Contrato extends javax.swing.JFrame {
                             .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
-                                .addGap(37, 37, 37)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(IdContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(69, 69, 69)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
                                     .addComponent(HoraContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -321,7 +315,7 @@ public class Contrato extends javax.swing.JFrame {
 
     private void AceptarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarContratoActionPerformed
         
-        mContrat.setIdContrato(this.IdContrato.getText());
+        //mContrat.setIdContrato(this.IdContrato.getText());
         mContrat.setLugar(this.txt_Lugar.getText());
         mContrat.setFecha(this.jCalendar1.getDate().toString());
         mContrat.setHora(this.HoraContrato.getText());
@@ -341,7 +335,7 @@ public class Contrato extends javax.swing.JFrame {
         try {
             jr =(JasperReport) JRLoader.loadObjectFromLocation(path);
             JasperPrint jpInv = JasperFillManager.fillReport(jr, null, cn.getConexion());
-            JasperViewer jv = new JasperViewer(jpInv);
+            JasperViewer jv = new JasperViewer(jpInv, false);
             jv.setVisible(true);
             jv.setTitle(path);
         } catch (JRException ex) {
@@ -366,17 +360,35 @@ public class Contrato extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TNumAActionPerformed
 
+    public void Descontar(){
+        Equipo nEquipo = new Equipo(); 
+        int ide=TEquipo.getSelectedRow();
+        //mBaseDeDatos.conectar();
+        mEquipo.setId_Equipo((String) this.TEquipo.getValueAt(ide, 0));     
+        nEquipo.setER(Integer.parseInt(this.TNumA.getText()));
+        mEquipo.setNumExist(Integer.parseInt((String) this.TEquipo.getValueAt(ide, 4)));
+        
+        //nEquipo.setNumExist();
+        
+        if (mBaseDeDatos.conectar()) {
+            if (mBaseDeDatos.modificarER(mEquipo, nEquipo)) {
+
+            } else{
+                JOptionPane.showMessageDialog(rootPane, "Error al Modificar");
+            }
+        }
+    }
     private void BAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAgregarActionPerformed
         Equipo mEquipo;
         int filaSeleccionada=TEquipo.getSelectedRow();
+        int ide=TEquipo.getSelectedRow();
         mBaseDeDatos.conectar();
         String [] DatosS;
+        NE = (Integer.parseInt(this.TNumA.getText()));
+        //-------------------------------------------------------
+        if (Integer.parseInt(this.TNumA.getText()) < Integer.parseInt((String) this.TEquipo.getValueAt(ide, 4)) ) {
+            Descontar();
         
-        int NE = (Integer.parseInt(this.TNumA.getText()));
-        
-        /*modelo3.addColumn("ID Equipo");
-        modelo3.addColumn("Nombre");
-        modelo3.addColumn("Tipo");*/
         String P = Integer.toString((NE) * Integer.parseInt(TEquipo.getValueAt(filaSeleccionada, 3).toString()));
 
        if (filaSeleccionada>=0) {
@@ -402,6 +414,10 @@ public class Contrato extends javax.swing.JFrame {
     Pre = Integer.parseInt(P);
     PrecioTotal = PrecioTotal + Pre;
     LabelTotal.setText("$" + PrecioTotal);
+        } else{
+        JOptionPane.showMessageDialog(rootPane, "Intenta rentar mas equipos de los existentes");
+    }
+        
     //--------------------------------------------------------------------------------------
     
         
@@ -454,14 +470,16 @@ public class Contrato extends javax.swing.JFrame {
         modelo.addColumn("Nombre");
         modelo.addColumn("Tipo");
         modelo.addColumn("Precio");
+        modelo.addColumn("Existencia");
 
     for (Object mEquipoArrays : mEquipoArray) {
-    DatosE = new String[4];
+    DatosE = new String[5];
     mEquipo = (Equipo)mEquipoArrays;
     DatosE[0] = mEquipo.getId_Equipo();
     DatosE[1] = mEquipo.getNombreE();
     DatosE[2] = mEquipo.getTipo();
     DatosE[3] = Integer.toString(mEquipo.getPrecio());
+    DatosE[4] = Integer.toString(mEquipo.getNumExist());
   
     modelo.addRow(DatosE);
     modeloOrdenado = new TableRowSorter<TableModel>(modelo);
@@ -474,6 +492,7 @@ public class Contrato extends javax.swing.JFrame {
     this.TEquipo.getColumnModel().getColumn(1).setPreferredWidth(200);
     this.TEquipo.getColumnModel().getColumn(2).setPreferredWidth(200);
     this.TEquipo.getColumnModel().getColumn(3).setPreferredWidth(200);
+    this.TEquipo.getColumnModel().getColumn(3).setPreferredWidth(80);
 
     if (this.TEquipo.getRowCount() > 0) {
     //this.jTabla.RowFilter.regexFilter("^a", 0);
@@ -524,7 +543,6 @@ public class Contrato extends javax.swing.JFrame {
     private javax.swing.JButton CancelarContrato;
     private javax.swing.JTextField DuracionContrato;
     private javax.swing.JTextField HoraContrato;
-    private javax.swing.JTextField IdContrato;
     private javax.swing.JLabel LabelTotal;
     private javax.swing.JTable TCliente;
     private javax.swing.JTable TEquipo;
@@ -532,7 +550,6 @@ public class Contrato extends javax.swing.JFrame {
     private javax.swing.JTextField TNumA;
     private javax.swing.JTable TSeleccion;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

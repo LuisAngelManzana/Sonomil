@@ -50,6 +50,7 @@ public class Inventario extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         BtnSalir = new javax.swing.JButton();
         BImprimir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,6 +81,13 @@ public class Inventario extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Rentado");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,6 +101,8 @@ public class Inventario extends javax.swing.JFrame {
                 .addComponent(BtnSalir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BImprimir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,7 +113,8 @@ public class Inventario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnSalir)
-                    .addComponent(BImprimir))
+                    .addComponent(BImprimir)
+                    .addComponent(jButton1))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -125,7 +136,7 @@ public class Inventario extends javax.swing.JFrame {
         try {
             jr =(JasperReport) JRLoader.loadObjectFromLocation(path);
             JasperPrint jpInv = JasperFillManager.fillReport(jr, null, cn.getConexion());
-            JasperViewer jv = new JasperViewer(jpInv);
+            JasperViewer jv = new JasperViewer(jpInv, false);
             jv.setVisible(true);
             jv.setTitle(path);
         } catch (JRException ex) {
@@ -133,6 +144,22 @@ public class Inventario extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_BImprimirActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Conector cn = new Conector("root","root","Sonomil","localhost:8888");
+        String path = "/Users/admin/Sonomil/Sonomil/src/Rentado.jasper";
+        JasperReport jr = null;
+        
+        try {
+            jr =(JasperReport) JRLoader.loadObjectFromLocation(path);
+            JasperPrint jpInv = JasperFillManager.fillReport(jr, null, cn.getConexion());
+            JasperViewer jv = new JasperViewer(jpInv, false);
+            jv.setVisible(true);
+            jv.setTitle(path);
+        } catch (JRException ex) {
+            Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void setFilas(){
         Equipo mEquipo;
@@ -146,9 +173,10 @@ public class Inventario extends javax.swing.JFrame {
         modelo.addColumn("No Existencia");
         modelo.addColumn("Tipo");
         modelo.addColumn("Precio");
+         modelo.addColumn("Rentado");
 
     for (Object mEquipoArrays : mEquipoArray) {
-    Datos = new String[6];
+    Datos = new String[7];
     mEquipo = (Equipo)mEquipoArrays;
     Datos[0] = mEquipo.getId_Equipo();
     Datos[1] = mEquipo.getNombreE();
@@ -156,6 +184,7 @@ public class Inventario extends javax.swing.JFrame {
     Datos[3] = Integer.toString(mEquipo.getNumExist());
     Datos[4] = mEquipo.getTipo();
     Datos[5] = Integer.toString(mEquipo.getPrecio());
+    Datos[6] = Integer.toString(mEquipo.getER());
   
     modelo.addRow(Datos);
     modeloOrdenado = new TableRowSorter<TableModel>(modelo);
@@ -169,6 +198,7 @@ public class Inventario extends javax.swing.JFrame {
     this.jTable1.getColumnModel().getColumn(2).setPreferredWidth(500);
     this.jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
     this.jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
+    this.jTable1.getColumnModel().getColumn(5).setPreferredWidth(100);
     this.jTable1.getColumnModel().getColumn(5).setPreferredWidth(100);
 
     if (this.jTable1.getRowCount() > 0) {
@@ -216,6 +246,7 @@ public class Inventario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BImprimir;
     private javax.swing.JButton BtnSalir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
